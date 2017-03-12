@@ -1,0 +1,30 @@
+{
+    "name": "vendor/personne-project",
+    "description": "Description of project PersonneProject.",
+    "authors": [
+        {
+            "name": "axxaroot",
+            "email": "your@email.here"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        },
+        "classmap": [
+            "src/Entity/Personne.php",
+            "src/Controller/PersonneManager.php",
+            "src/Utils/Zaninotto.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "src\\": "Controller/",
+            "src\\": "Entity/",
+            "src\\": "Utils/"
+        }
+    },
+    "require": {
+        "fzaninotto/faker": "^1.6"
+    }
+}
