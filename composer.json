@@ -9,19 +9,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "": "src/"
-        },
-        "classmap": [
-            "src/Entity/Personne.php",
-            "src/Controller/PersonneManager.php",
-            "src/Utils/Zaninotto.php"
-        ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "src\\": "Controller/",
-            "src\\": "Entity/",
-            "src\\": "Utils/"
+            "Axxa\\": "src"
         }
     },
     "require": {

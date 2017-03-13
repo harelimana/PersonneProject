@@ -1,8 +1,9 @@
 <?php
 
-namespace src\Controller;
+namespace Axxa\Controller;
 
-use src\Entity\Personne;
+use Axxa\Entity\Personne;
+use Faker\Factory;
 use PDO;
 
 /**
@@ -31,12 +32,7 @@ class PersonneManager {
 
         $faker = Factory::create();
         $personne = new Personne(); // creation de l'entité Personne
-        $personne->getNom($faker->name);
-        $personne->getPrenom($faker->firstName);
-        $personne->getPrenom($faker->address);
-        $personne->getCodepostal($faker->countryCode);
-        $personne->getPays($faker->country);
-        $personne->getSociete($faker->company);
+        
         $stmt = $this->connexion->prepare("INSERT INTO personne
                 SET nom = :nom,
                 prenom = :prenom,
@@ -49,7 +45,7 @@ class PersonneManager {
         $stmt->bindValue(':adresse', $personne->getAdresse($faker->address));
         $stmt->bindValue(':codepostal', $personne->getCodePostal($faker->countryCode));
         $stmt->bindValue(':pays', $personne->getPays($faker->country));
-        $stmt->bindValue(':societe', $personne->societe($faker->company));
+        $stmt->bindValue(':societe', $personne->getSociete($faker->company));
         return $stmt->execute();
     }
 
@@ -57,12 +53,7 @@ class PersonneManager {
 
         $faker = Factory::create();
         $personne = new Personne(); // creation de l'entité Personne
-        $personne->getNom($faker->name);
-        $personne->getPrenom($faker->firstName);
-        $personne->getPrenom($faker->address);
-        $personne->getCodepostal($faker->countryCode);
-        $personne->getPays($faker->country);
-        $personne->getSociete($faker->company);
+        
         $stmt = $this->connexion->prepare("UPDATE personne
                 SET nom = :nom,
                 prenom = :prenom,

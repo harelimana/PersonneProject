@@ -1,5 +1,5 @@
 <?php
-namespace src\Entity;
+namespace Axxa\Entity;
 /**
  * Description of Personne
  *

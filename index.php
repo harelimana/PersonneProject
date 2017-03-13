@@ -1,27 +1,32 @@
 <?php
-namespace src\Controller;
-namespace src\Entity;
-namespace src\Utils;
+namespace Axxa;
 
 use PDO;
-use src\Controller\PersonneManager;
-use src\Entity\Personne;
-use Faker\Factory;
+use \Controller\PersonneManager;
+use \Entity\Personne;
+use \Utils\Zaninotto;
 
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/Entity/Personne.php';
+require_once __DIR__ . '/Controller/PersonneManager.php';
+require_once __DIR__ . '/Utils/Zaninotto.php';
 
 $connex = new PDO('mysql:host=localhost;dbname=adresses', 'root', 'root');
 
-$personna = new Personne();
-$personManager = new PersonneManager($connex);
+$faker = Utils\Zaninotto::generateFake(array("nom"=>'lastname',
+    "prenom"=>'firstname',
+    "adresse"=>'address',
+    "codepostal"=>'postcode',
+    "pays"=>'country',
+    "societe"=>'company'));
 
-$faker = Faker\Factory::create('fr_BE');
+$personna = new Entity\Personne($faker);
+$personManager = new Controller\PersonneManager($connex);
 
-echo $faker->name . '</br>';
-echo $faker->firstName . '</br>';
-echo $faker->address . '</br>';
-echo $faker->countryCode . '</br>';
-echo $faker->country . '</br>';
-echo $faker->company . '</br>';
+
+$personManager->createPersonne($personna);
+
+var_dump($faker);
 
 $connex->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 ?>
@@ -35,14 +40,7 @@ $connex->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     </head>
     <body>
         <?php
-        echo '</br>';
-        echo $faker->name . '</br>';
-        echo $faker->firstName . '</br>';
-        echo $faker->address . '</br>';
-        echo $faker->countryCode . '</br>';
-        echo $faker->country . '</br>';
-        echo $faker->company . '</br>';
-
+      
         ?>
     </body>
 </html>
