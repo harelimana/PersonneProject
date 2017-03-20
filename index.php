@@ -6,6 +6,7 @@ use PDO;
 use \Controller\PersonneManager;
 use \Entity\Personne;
 use \Utils\Zaninotto;
+use \vendor\autoload;
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/Entity/Personne.php';
@@ -31,7 +32,6 @@ $personManager = new Controller\PersonneManager($connex);
 $personManager->createPersonne($personna);
 
 var_dump($faker);
-var_dump($personna);
 
 ?>
 

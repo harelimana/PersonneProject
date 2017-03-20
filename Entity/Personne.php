@@ -6,7 +6,7 @@ namespace Axxa\Entity;
  * @author axxaroot
  */
 class Personne {
-    
+    private $id;
     private $nom;
     private $prenom;
     private $adresse;
@@ -18,7 +18,7 @@ class Personne {
      * @param array $personne
      */
 
-    function __construct(array $personne = null) {
+    function __construct($personne = null) {
         if (!$personne == null) {
             $this->hydrate($personne);
         }
@@ -26,11 +26,15 @@ class Personne {
 
     public function hydrate($personne) {
         foreach ($personne as $key => $value) {
-            $methodName = 'set' . ucfirst($this->$key);
+            $methodName = 'set' . ucfirst($key);
             if (method_exists($this, $methodName)) {
                 $this->$methodName($value);
             }
         }
+    }
+
+    public function getId() {
+        return $this->id;
     }
 
     public function getNom() {
@@ -57,6 +61,9 @@ class Personne {
         return $this->societe;
     }
 
+     public function setId($id) {
+        $this->id = $id;
+    }
     public function setNom($nom) {
         $this->nom = $nom;
     }
