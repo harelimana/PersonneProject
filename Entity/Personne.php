@@ -81,7 +81,13 @@ class Personne {
     }
 
     public function __toString() {
-        die('this is a Person Entity !');
+        return printf('%s%s%s%s%s',
+                $this->getNom(),
+                $this->getPrenom(),
+                $this->getAdresse(),
+                $this->getCodepostal(),
+                $this->getPays(),
+                $this->getSociete());
     }
 
 }

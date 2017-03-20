@@ -4,7 +4,7 @@ namespace Axxa\Controller;
 
 use Axxa\Entity\Personne;
 use Faker\Factory;
-use PDO;
+use \PDO;
 
 /**
  * Description of PersonneManager
@@ -15,8 +15,8 @@ class PersonneManager {
 
     private $connex;
 
-    function __construct($connex) {
-        $this->connexion = $connex;
+    function __construct($con) {
+        $this->connexion = $con;
     }
 
     public function getConnexion() {
@@ -30,9 +30,6 @@ class PersonneManager {
 
     public function createPersonne(Personne $personne) {
 
-        $faker = Factory::create();
-        $personne = new Personne(); // creation de l'entité Personne
-        
         $stmt = $this->connexion->prepare("INSERT INTO personne
                 SET nom = :nom,
                 prenom = :prenom,
@@ -40,20 +37,17 @@ class PersonneManager {
                 codepostal = :codepostal,
                 pays = :pays,
                 societe = :societe");
-        $stmt->bindValue(':nom', $personne->getNom($faker->name));
-        $stmt->bindValue(':prenom', $personne->getPrenom($faker->firstName));
-        $stmt->bindValue(':adresse', $personne->getAdresse($faker->address));
-        $stmt->bindValue(':codepostal', $personne->getCodePostal($faker->countryCode));
-        $stmt->bindValue(':pays', $personne->getPays($faker->country));
-        $stmt->bindValue(':societe', $personne->getSociete($faker->company));
+        $stmt->bindValue(':nom', $personne->getNom());
+        $stmt->bindValue(':prenom', $personne->getPrenom());
+        $stmt->bindValue(':adresse', $personne->getAdresse());
+        $stmt->bindValue(':codepostal', $personne->getCodePostal());
+        $stmt->bindValue(':pays', $personne->getPays());
+        $stmt->bindValue(':societe', $personne->getSociete());
         return $stmt->execute();
     }
 
     public function updatePersonne(Personne $personne) {
 
-        $faker = Factory::create();
-        $personne = new Personne(); // creation de l'entité Personne
-        
         $stmt = $this->connexion->prepare("UPDATE personne
                 SET nom = :nom,
                 prenom = :prenom,
@@ -61,12 +55,12 @@ class PersonneManager {
                 codepostal = :codepostal,
                 pays = :pays,
                 societe = :societe");
-        $stmt->bindValue(':nom', $personne->getNom($faker->name));
-        $stmt->bindValue(':prenom', $personne->getPrenom($faker->firstName));
-        $stmt->bindValue(':adresse', $personne->getAdresse($faker->address));
-        $stmt->bindValue(':codepostal', $personne->getCodePostal($faker->countryCode));
-        $stmt->bindValue(':pays', $personne->getPays($faker->country));
-        $stmt->bindValue(':societe', $personne->societe($faker->company));
+        $stmt->bindValue(':nom', $personne->getNom());
+        $stmt->bindValue(':prenom', $personne->getPrenom());
+        $stmt->bindValue(':adresse', $personne->getAdresse());
+        $stmt->bindValue(':codepostal', $personne->getCodePostal());
+        $stmt->bindValue(':pays', $personne->getPays());
+        $stmt->bindValue(':societe', $personne->societe());
         return $stmt->execute();
     }
 
